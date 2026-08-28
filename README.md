@@ -416,7 +416,7 @@ accounting-app/
 
 ## 许可证
 
-Copyright © 2026 账痕团队
+Copyright © 2026 alive-ns 个人开发者
 
 ---
 
