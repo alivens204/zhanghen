@@ -1,4 +1,4 @@
-# 账痕 - 个人记账应用
+# 账痕（Zhang Hen） — 个人记账应用（永远没有广告）
 
 > 让每一笔账单都有痕迹！
 
@@ -6,23 +6,57 @@
 
 ## 📱 应用简介
 
-**账痕**是一款功能强大的个人记账应用，支持快速记账、详细记账、报销管理、预算管理、统计分析等功能。应用采用本地存储，数据安全可靠，支持多种数据导入导出格式。
+**Zhang Hen（账痕）** 是一款个人记账应用，支持快速记账、详细记账、报销管理、预算管理、统计分析等功能。应用采用本地存储，数据安全可靠，支持多语言切换，支持多种数据导入导出格式。
 
-**当前版本**：v0.4.0  
-**应用名称**：账痕  
-**支持平台**：Android
+| 项目 | 信息 |
+|------|------|
+| **当前版本** | v0.5.0 |
+| **应用名称** | 账痕 / 賬痕 / Zhang Hen |
+| **支持平台** | Android、Web |
+| **包名** | com.accounting.app |
+| **最低 Android** | API 24 (Android 7.0) |
 
 ---
 
 ## ✨ 核心功能
 
-### 1. 双模式记账
+### 1. 🌐 多语言支持
+
+支持三种语言一键切换，即时生效，无需重启：
+
+| 语言 | 应用名称 | 说明 |
+|------|---------|------|
+| 简体中文 | 账痕 | 源语言，完整支持 |
+| 繁體中文 | 賬痕 | 含台灣用語習慣（匯入/匯出/設定/賬戶等） |
+| English | Zhang Hen | 完整英文界面 |
+
+**切换方式**：我的 → 🌐 语言设置 → 选择语言
+
+**翻译覆盖范围**：
+- 所有页面标题和导航
+- 分类名称（餐饮→Food、交通→Transport 等）
+- 账户名称（现金→Cash、银行卡→Bank Card 等）
+- 按钮、对话框、提示信息
+- 统计图表标签
+- 报销状态标签
+- 报销记录备注（自动翻译已存储的中文前缀）
+- 日期格式（中文"3月25日"→英文"Mar 25"）
+
+### 2. 🔍 记录搜索
+
+在「记录」页顶部新增搜索栏：
+- **搜索范围**：备注、分类名称（当前语言）、金额
+- **匹配方式**：模糊匹配，大小写不敏感
+- **组合筛选**：与"全部/待报销/已报销"筛选组合使用
+- **实时过滤**：输入即搜索，带一键清除按钮
+
+### 3. 💰 双模式记账
 
 #### 快捷模式
 - 点击首页「+」按钮，弹出半全屏快速记账面板
 - 支持多行输入，每行一条记录
 - 输入格式：`物品名称 金额`（如：`面 12`、`咖啡 25`、`打车 15`）
-- 自动识别分类（通过智能映射表）
+- 自动识别分类（通过智能映射表，支持 80+ 种分类名称）
 - 支持选择报销状态（无需报销/待报销/已报销）
 
 #### 详细模式
@@ -30,7 +64,7 @@
 - 支持选择：类型、金额、分类、账户、备注、日期时间
 - 支持4种报销状态：无需报销、待报销、全额报销、部分报销
 
-### 2. 报销管理
+### 4. 🧾 报销管理
 
 | 状态 | 说明 | 自动生成记录 |
 |------|------|-------------|
@@ -44,21 +78,23 @@
 2. 报销后，编辑该记录选择"全额报销"或"部分报销"
 3. 系统自动生成对应的报销收入记录
 4. 原记录显示"全额报销"或"部分报销"标签
+5. 报销记录备注自动使用当前语言前缀（`报销：` / `報銷：` / `Reimbursement:`）
 
-### 3. 预算管理
+### 5. 📊 预算管理
 
 - 支持按分类设置月度预算
 - 首页显示预算执行情况
 - 超支预警提示
 
-### 4. 统计分析
+### 6. 📈 统计分析
 
 - 月度/年度收支统计
-- 分类支出占比分析
+- 分类支出占比分析（柱状图）
+- 月度趋势图（折线图，收入+支出）
 - 账户余额统计
 - 图表可视化展示
 
-### 5. 数据导入导出
+### 7. 💾 数据导入导出
 
 #### 导出格式
 | 格式 | 说明 |
@@ -67,7 +103,6 @@
 | XLS | 旧版Excel |
 | TXT | 纯文本 |
 | CSV | 逗号分隔 |
-| JSON | 结构化数据 |
 
 #### 导入能力
 - **自有格式**：完美兼容账痕导出的文件
@@ -77,10 +112,9 @@
 
 #### 导出文件名格式
 ```
-账痕_2026-08-25.xlsx
+账痕_日期_时间（时分）.xlsx
+账痕_2026-08-25_1530.xlsx
 ```
-
----
 
 ## 📂 项目结构
 
@@ -88,36 +122,46 @@
 accounting-app/
 ├── app/                      # 页面目录
 │   ├── (tabs)/              # 底部标签页
+│   │   ├── _layout.tsx      # 标签页布局
 │   │   ├── home.tsx         # 首页（月总览+记录列表）
-│   │   ├── records.tsx      # 记录页（全部/待报销/已报销）
-│   │   ├── statistics.tsx   # 统计页
-│   │   └── profile.tsx      # 我的页面
+│   │   ├── records.tsx      # 记录页（搜索+筛选）
+│   │   ├── stats.tsx        # 统计页
+│   │   └── profile.tsx      # 我的页面（语言切换）
 │   ├── add-record.tsx       # 记一笔页面
 │   ├── budget.tsx           # 预算管理
+│   ├── accounts.tsx         # 账户管理
+│   ├── reimbursement.tsx    # 报销管理
+│   ├── db-config.tsx        # 数据库配置
+│   ├── sync.tsx             # 数据同步
 │   └── _layout.tsx          # 全局布局
+├── i18n/                    # 多语言翻译
+│   ├── zhHans.ts            # 简体中文
+│   ├── zhHant.ts            # 繁體中文
+│   ├── en.ts                # English
+│   └── index.ts             # 翻译引擎 + t() 函数
 ├── components/              # 组件目录
 │   ├── TransactionItem.tsx  # 交易记录项
-│   └── CategoryPicker.tsx   # 分类选择器
+│   ├── CategoryPicker.tsx   # 分类选择器
+│   └── AccountPicker.tsx    # 账户选择器
 ├── constants/               # 常量定义
 │   ├── categories.ts        # 分类配置（11支出+7收入）
 │   ├── accounts.ts          # 账户配置（5种账户）
 │   └── theme.ts             # 主题样式
 ├── database/                # 数据库
-│   ├── storage.ts           # 本地存储实现
-│   ├── schema.ts            # 数据结构定义
+│   ├── migration.ts         # 数据库初始化
 │   └── queries.ts           # 数据库查询
 ├── store/                   # 状态管理
-│   └── useRecordStore.ts    # 记账数据Store
+│   ├── useRecordStore.ts    # 记账数据Store
+│   ├── useLanguageStore.ts  # 语言状态Store
+│   └── useBudgetStore.ts    # 预算Store
 ├── utils/                   # 工具函数
 │   ├── exportImport.ts      # 导入导出核心
 │   ├── nativeFilePicker.ts  # Android原生文件选择
-│   ├── quickParse.ts        # 快捷输入解析
+│   ├── quickParse.ts        # 快捷输入解析（80+分类映射）
 │   └── format.ts            # 格式化工具
 ├── android/                 # Android原生代码
-│   └── app/src/main/java/...
-│       └── nativefilepicker/ # 自定义原生文件选择模块
-├── 账痕.apk                 # Android安装包
-└── package.json             # 项目配置
+├── dist/                    # Web构建输出
+└── 账痕-v0.5.0.apk          # Android安装包
 ```
 
 ---
@@ -128,54 +172,70 @@ accounting-app/
 
 | 标签 | 功能 |
 |------|------|
-| 首页 | 月总览 + 每日收支记录 |
-| 记录 | 全部记录（支持按报销状态筛选） |
-| 统计 | 收支统计图表 |
-| 我的 | 设置、导入导出、版本信息 |
+| 🏠 首页 | 月总览 + 每日收支记录 |
+| 📋 记录 | 全部记录（搜索 + 按报销状态筛选） |
+| 📊 统计 | 收支统计图表 |
+| 👤 我的 | 设置、导入导出、语言切换、版本信息 |
 
 ### 首页布局
 
 ```
 ┌─────────────────────────────────────┐
-│  账痕                               │
+│  账痕 / Zhang Hen                   │
 ├─────────────────────────────────────┤
-│  < 2026年八月总览 >                  │
+│  < 8月 / Aug >                      │
 │  月收入 · 月支出 · 月结余            │
 ├─────────────────────────────────────┤
-│  25日 周二     收入 ¥100 支出 ¥165   │
+│  28日 周五     收入 ¥12 支出 ¥12     │
 │  ─────────────────────────────────  │
-│  🚗 无备注              -¥165       │
-│     18:51 · 交通        部分报销     │
-│  💰 报销：...           +¥100       │
-│     18:51 · 报销        部分报销     │
+│  🚗 No note              -¥12      │
+│     15:49 · Transport    Full      │
+│  💰 Reimbursement: ...   +¥12      │
+│     15:49 · Reimbursement Full     │
 ├─────────────────────────────────────┤
 │                            [+] 按钮  │
 └─────────────────────────────────────┘
 ```
 
----
+### 记录页布局
 
-## 💾 数据存储
+```
+┌─────────────────────────────────────┐
+│  All Records / 全部记录              │
+├─────────────────────────────────────┤
+│  🔍 Search records... / 搜索记录...  │
+├─────────────────────────────────────┤
+│  [All]  [Pending]  [Reimbursed]     │
+├─────────────────────────────────────┤
+│  28 Fri       Income ¥12  Expense ¥12│
+│  🚗 No note              -¥12      │
+│  💰 Reimbursement: ...   +¥12      │
+└─────────────────────────────────────┘
+```
 
-### 存储方式
-- **Android端**：AsyncStorage（本地持久化）
+### 我的页面布局
 
-### 数据表结构
-
-#### transactions（交易记录）
-| 字段 | 类型 | 说明 |
-|------|------|------|
-| id | string | 唯一标识 |
-| amount | number | 金额 |
-| type | string | 类型（income/expense） |
-| category_id | string | 分类ID |
-| account_id | string | 账户ID |
-| note | string | 备注 |
-| date | string | 日期（YYYY-MM-DD） |
-| time | string | 时间（HH:mm） |
-| reimbursement_status | string | 报销状态 |
-| reimbursement_date | string | 报销日期 |
-| reimbursement_note | string | 报销备注 |
+```
+┌─────────────────────────────────────┐
+│  Profile / 我的                      │
+├─────────────────────────────────────┤
+│  Asset Overview / 资产概览           │
+│  Total Balance / 总余额    ¥0.00    │
+│  💵 Cash  🏦 Bank Card  💳 Credit   │
+├─────────────────────────────────────┤
+│  📋 Accounts / 账户管理              │
+│  📊 Budget / 预算管理                │
+│  🧾 Reimbursement / 报销管理         │
+│  📝 Recording Mode / 记账方式        │
+│  📥 Import Data / 导入数据           │
+│  📤 Export Data / 导出数据           │
+│  🌐 Language / 语言设置              │
+├─────────────────────────────────────┤
+│  Zhang Hen v0.5.0                   │
+│  Every transaction has its trace!   │
+│  Custom Edition                     │
+└─────────────────────────────────────┘
+```
 
 ---
 
@@ -183,43 +243,79 @@ accounting-app/
 
 ### 支出分类（11种）
 
-| 图标 | 名称 | ID |
-|------|------|-----|
-| 🍜 | 餐饮 | expense_food |
-| 🚗 | 交通 | expense_transport |
-| 🛒 | 日用 | expense_daily |
-| 👔 | 服饰 | expense_clothing |
-| 🎮 | 娱乐 | expense_entertainment |
-| 🏠 | 住房 | expense_housing |
-| 💊 | 医疗 | expense_medical |
-| 📚 | 教育 | expense_education |
-| 📱 | 通讯 | expense_communication |
-| 💳 | 金融 | expense_finance |
-| 📦 | 其他支出 | expense_other |
+| 图标 | 简体中文 | 繁體中文 | English | ID |
+|------|---------|---------|---------|-----|
+| 🍜 | 餐饮 | 餐飲 | Food | expense_food |
+| 🚗 | 交通 | 交通 | Transport | expense_transport |
+| 🛒 | 日用 | 日用 | Daily | expense_daily |
+| 👔 | 服饰 | 服飾 | Clothing | expense_clothing |
+| 🎮 | 娱乐 | 娛樂 | Entertainment | expense_entertainment |
+| 🏠 | 住房 | 住房 | Housing | expense_housing |
+| 💊 | 医疗 | 醫療 | Medical | expense_medical |
+| 📚 | 教育 | 教育 | Education | expense_education |
+| 📱 | 通讯 | 通訊 | Communication | expense_communication |
+| 💳 | 金融 | 金融 | Finance | expense_finance |
+| 📦 | 其他支出 | 其他支出 | Other Expense | expense_other |
 
 ### 收入分类（7种）
 
-| 图标 | 名称 | ID |
-|------|------|-----|
-| 💼 | 工资 | income_salary |
-| 🎁 | 奖金 | income_bonus |
-| 📈 | 投资 | income_investment |
-| 💻 | 兼职 | income_parttime |
-| 🧧 | 红包 | income_redpacket |
-| 💰 | 报销 | income_reimbursement |
-| 💰 | 其他收入 | income_other |
+| 图标 | 简体中文 | 繁體中文 | English | ID |
+|------|---------|---------|---------|-----|
+| 💼 | 工資 | 工資 | Salary | income_salary |
+| 🎁 | 奖金 | 獎金 | Bonus | income_bonus |
+| 📈 | 投资 | 投資 | Investment | income_investment |
+| 💻 | 兼职 | 兼職 | Part-time | income_parttime |
+| 🧧 | 红包 | 紅包 | Red Packet | income_redpacket |
+| 💰 | 报销 | 報銷 | Reimbursement | income_reimbursement |
+| 💰 | 其他收入 | 其他收入 | Other Income | income_other |
 
 ---
 
 ## 💳 支持的账户
 
-| 图标 | 名称 | 类型 |
+| 图标 | 简体中文 | 繁體中文 | English | ID |
+|------|---------|---------|---------|-----|
+| 💵 | 现金 | 現金 | Cash | cash |
+| 🏦 | 银行卡 | 銀行卡 | Bank Card | bank |
+| 💳 | 信用卡 | 信用卡 | Credit Card | credit |
+| 📱 | 支付宝 | 支付寶 | Alipay | alipay |
+| 💬 | 微信 | 微信 | WeChat | wechat |
+
+---
+
+## 🌐 翻译系统架构
+
+### 核心文件
+
+| 文件 | 说明 |
+|------|------|
+| `i18n/zhHans.ts` | 简体中文翻译（源语言，~150个key） |
+| `i18n/zhHant.ts` | 繁體中文翻译（含台灣用語） |
+| `i18n/en.ts` | English 翻译 |
+| `i18n/index.ts` | 翻译引擎 + 工具函数 |
+| `store/useLanguageStore.ts` | 语言状态管理（Zustand + AsyncStorage 持久化） |
+
+### 工具函数
+
+| 函数 | 说明 | 示例 |
 |------|------|------|
-| 💵 | 现金 | cash |
-| 🏦 | 银行卡 | bank |
-| 💳 | 信用卡 | credit |
-| 📱 | 支付宝 | alipay |
-| 💬 | 微信 | wechat |
+| `t(key)` | 翻译文本 | `t('nav.home')` → "首页" / "Home" |
+| `getCategoryName(id)` | 分类名称 | `getCategoryName('expense_food')` → "餐饮" / "Food" |
+| `getAccountName(id)` | 账户名称 | `getAccountName('cash')` → "现金" / "Cash" |
+| `getReimbursementLabel(status)` | 报销状态 | `getReimbursementLabel('pending')` → "待报销" / "Pending" |
+| `getWeekday(index)` | 星期名称 | `getWeekday(1)` → "周一" / "Mon" |
+| `getMonthName(num)` | 月份名称 | `getMonthName(3)` → "三月" / "Mar" |
+| `getMonthWithUnit(num)` | 带单位月份 | `getMonthWithUnit(3)` → "3月" / "Mar" |
+| `formatDateLocalized(date)` | 本地化日期 | `formatDateLocalized('2026-03-25')` → "3月25日" / "Mar 25" |
+| `translateNote(note)` | 翻译存储的备注 | `translateNote('报销：...')` → "Reimbursement: ..." |
+
+### 技术特点
+
+- **零依赖**：自研轻量 i18n 方案，无第三方库
+- **即时切换**：Zustand 状态 + AsyncStorage 持久化，切换即时生效
+- **翻译键扁平化**：`t('profile.title')` 简洁直观
+- **运行时翻译**：翻译在渲染时执行，支持动态语言切换
+- **向后兼容**：`translateNote()` 自动翻译已存储的中文备注
 
 ---
 
@@ -235,10 +331,12 @@ accounting-app/
 | 状态管理 | Zustand |
 | UI组件 | React Native Paper |
 | 本地存储 | AsyncStorage |
+| 数据库 | expo-sqlite |
 | 图表 | react-native-gifted-charts |
 | 日期处理 | Day.js |
 | Excel处理 | xlsx |
 | 手势 | react-native-gesture-handler |
+| 多语言 | 自研 i18n（零依赖） |
 
 ### Android原生模块
 
@@ -246,157 +344,43 @@ accounting-app/
 |------|------|
 | NativeFilePicker | 自定义文件选择器，绕过expo-document-picker兼容性问题 |
 
+### 构建信息
+
+| 项目 | 信息 |
+|------|------|
+| Android SDK | 36 |
+| Build Tools | 36.0.0 |
+| NDK | 27.1.12297006 |
+| CMake | 3.22.1 |
+| Java | JDK 21 |
+| Gradle | 9.3.1 |
+| APK大小 | ~110 MB |
+
 ---
 
 ## 📱 安装与使用
 
 ### Android安装
 
-1. **卸载旧版本**（首次安装可跳过）
-2. **下载APK文件**：`账痕.apk`（约110MB）
-3. **允许安装未知来源应用**
-4. **完成安装**
+1. 下载 `张痕-v0.5.0.apk`（约110MB）
+2. 允许安装未知来源应用
+3. 完成安装
 
----
+### 构建APK
 
-## 🔄 版本更新日志
+```bash
+# 1. 生成Android原生项目
+npx expo prebuild --platform android --clean
 
-### v0.4.0
-- ✅ 首页改为月视图，显示月总览+日收支汇总
-- ✅ 报销标签改为纯文字显示（全额报销/部分报销）
-- ✅ 修复部分报销收入记录标签显示问题
+# 2. 构建Release APK
+cd android
+set ANDROID_HOME=D:\android-sdk
+set JAVA_HOME=D:\java\jdk-21
+gradlew.bat assembleRelease
 
-### v0.3.9
-
-- ✅ 修复导出功能 `Paths` 属性错误
-- ✅ 扩展分类映射支持（80+种分类）
-- ✅ 支持第三方记账软件数据导入（小黑记账等）
-- ✅ 支持日期时间同格格式解析
-- ✅ 宽松列头匹配（跳过无关列）
-- ✅ 更新应用名称为"账痕"
-
-### v0.3.8
-
-- ✅ 修复了一些已知问题
-
-### v0.3.7
-
-- ✅ 修复了一些已知问题
-
-### v0.3.6
-
-- ✅ 修复了一些已知问题
-
-### v0.3.5
-
-- ✅ 修复了一些已知问题
-
-### v0.3.4
-
-- ✅ 修复了一些已知问题
-
-### v0.3.3
-
-- ✅ 修复了一些已知问题
-
-### v0.3.2
-
-- ✅ 修复了一些已知问题
-
-### v0.3.1
-
-- ✅ 修复了一些已知问题
-
-### v0.3.0
-
-- ✅ 修复了一些已知问题
-
-### v0.2.9
-
-- ✅ 修复了一些已知问题
-
-### v0.2.8
-
-- ✅ 修复了一些已知问题
-
-### v0.2.7
-
-- ✅ 修复了一些已知问题
-
-### v0.2.6
-
-- ✅ 添加快捷记账模式
-- ✅ 添加报销管理功能
-- ✅ 添加预算管理功能
-- ✅ 添加数据导出功能
-- ✅ 修复分类选择器滑动问题
-
-### v0.2.5
-
-- ✅ 修复了一些已知问题
-
-### v0.2.4
-
-- ✅ 修复了一些已知问题
-
-### v0.2.3
-
-- ✅ 修复记录删除响应bug
-
-### v0.2.2
-
-- ✅ 调整记录删除方式
-
-### v0.2.1
-
-- ✅ 初始版本发布
-- ✅ 基础记账功能
-- ✅ 统计图表
-- ✅ 数据存储
-
-### v0.2.0
-
-- ✅ 删除“我的”页面我的信息模块
-
-### v0.1.9
-
-- ✅ 优化“我的”页
-
-### v0.1.8
-
-- ✅ 丰富“我的”页
-
-### v0.1.7
-
-- ✅ 优化“统计”页
-
-### v0.1.6
-
-- ✅ 丰富“统计”页
-
-### v0.1.5
-
-- ✅ 优化“记录”页
-
-### v0.1.4
-
-- ✅ 丰富“记录”页
-
-### v0.1.3
-
-- ✅ 优化“首页”
-
-### v0.1.2
-
-- ✅ 丰富“首页”
-
-### v0.1.1
-
-- ✅ 构建基础页
-
-### v0.1.0
-
-- ✅ 构建框架
+# 3. APK输出路径
+# android/app/build/outputs/apk/release/app-release.apk
+```
 
 ---
 
@@ -410,7 +394,7 @@ accounting-app/
 | UI 组件库 | react-native-paper |
 | 状态管理 | Zustand |
 | 构建工具 | Expo CLI + Gradle |
-| 最后更新 | 2026-08-25 |
+| 最后更新 | 2026-08-28 |
 
 ---
 
@@ -420,4 +404,4 @@ Copyright © 2026 alive-ns 个人开发者
 
 ---
 
-> 📱 **账痕** — 让每一笔账单都有痕迹！
+> 📱 **账痕（Zhang Hen）** — 让每一笔账单都有痕迹！
