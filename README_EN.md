@@ -10,7 +10,7 @@
 
 | Item | Details |
 |------|---------|
-| **Version** | v0.5.0 |
+| **Version** | v2026.9.5 |
 | **App Name** | Zhang Hen |
 | **Platforms** | Android, Web |
 | **Package** | com.accounting.app |
@@ -162,7 +162,7 @@ accounting-app/
 │   └── format.ts            # Formatting utilities
 ├── android/                 # Android native code
 ├── dist/                    # Web build output
-└── ZhangHen-v0.5.0.apk     # Android installer
+└── ZhangHen-v2026.9.5.apk     # Android installer
 ```
 
 ---
@@ -232,7 +232,7 @@ accounting-app/
 │  📤 Export Data                     │
 │  🌐 Language                        │
 ├─────────────────────────────────────┤
-│  Zhang Hen v0.5.0                   │
+│  Zhang Hen v2026.9.5                 │
 │  Every transaction has its trace!   │
 │  Custom Edition                     │
 └─────────────────────────────────────┘
@@ -355,7 +355,7 @@ accounting-app/
 
 ### Android Installation
 
-1. Download `ZhangHen-v0.5.0.apk` (~110MB)
+1. Download `ZhangHen-v2026.9.5.apk` (~110MB)
 2. Allow installation from unknown sources
 3. Complete installation
 
