@@ -1,4 +1,4 @@
-# 账痕（Zhang Hen） — 个人记账应用（永远没有广告）
+# 账痕（Zhang Hen） — 记账应用（永远没有广告）
 
 > 让每一笔账单都有痕迹！
 
@@ -10,7 +10,7 @@
 
 | 项目 | 信息 |
 |------|------|
-| **当前版本** | v0.5.0 |
+| **当前版本** | v2026.9.5 |
 | **应用名称** | 账痕 / 賬痕 / Zhang Hen |
 | **支持平台** | Android、Web |
 | **包名** | com.accounting.app |
@@ -161,7 +161,7 @@ accounting-app/
 │   └── format.ts            # 格式化工具
 ├── android/                 # Android原生代码
 ├── dist/                    # Web构建输出
-└── 账痕-v0.5.0.apk          # Android安装包
+└── 账痕-v2026.9.5.apk          # Android安装包
 ```
 
 ---
@@ -231,7 +231,7 @@ accounting-app/
 │  📤 Export Data / 导出数据           │
 │  🌐 Language / 语言设置              │
 ├─────────────────────────────────────┤
-│  Zhang Hen v0.5.0                   │
+│  Zhang Hen v2026.9.5                 │
 │  Every transaction has its trace!   │
 │  Custom Edition                     │
 └─────────────────────────────────────┘
@@ -362,7 +362,7 @@ accounting-app/
 
 ### Android安装
 
-1. 下载 `张痕-v0.5.0.apk`（约110MB）
+1. 下载 `账痕-v2026.9.5.apk`（约110MB）
 2. 允许安装未知来源应用
 3. 完成安装
 
